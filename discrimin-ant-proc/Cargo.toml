@@ -1,0 +1,33 @@
+[package]
+name = "discrimin-ant-proc"
+version = "0.1.0"
+edition = "2024"
+description = "A tiny crate to make working with discriminants easier."
+repository = "https://github.com/TheMikeste1/discrimin-ant"
+readme = "../README.md"
+license = "MIT OR Apache-2.0"
+keywords = [
+  "discriminant",
+  "enum",
+  "marshalling",
+  "serialization",
+  "no_std",
+  "derive",
+]
+categories = ["encoding", "no-std", "no-std::no-alloc"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+num-traits = { workspace = true }
+proc-macro2 = "1.0.95"
+quote = "1.0.40"
+syn = { workspace = true, features = ["full"] }
+
+[dev-dependencies]
+assert_matches = "1.5.0"
+discrimin-ant = { path = "../discrimin-ant" }
+
+[lints]
+workspace = true
