@@ -6,14 +6,7 @@ description = "A tiny crate to make working with discriminants easier."
 repository = "https://github.com/TheMikeste1/discrimin-ant"
 readme = "../README.md"
 license = "MIT OR Apache-2.0"
-keywords = [
-  "discriminant",
-  "enum",
-  "marshalling",
-  "serialization",
-  "no_std",
-  "derive",
-]
+keywords = ["discriminant", "enum", "marshalling", "serialization", "no_std"]
 categories = ["encoding", "no-std", "no-std::no-alloc"]
 
 [lib]
