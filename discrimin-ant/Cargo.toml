@@ -1,6 +1,6 @@
 [package]
 name = "discrimin-ant"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "A tiny crate to make working with discriminants easier."
 repository = "https://github.com/TheMikeste1/discrimin-ant"
@@ -14,6 +14,7 @@ default = []
 
 [dependencies]
 num-traits = { workspace = true }
+discrimin-ant-proc = { version = "0.1.0", optional = true, path = "../discrimin-ant-proc" }
 
 [dev-dependencies]
 discrimin-ant-proc = { path = "../discrimin-ant-proc" }
