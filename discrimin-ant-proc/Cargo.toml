@@ -1,6 +1,6 @@
 [package]
 name = "discrimin-ant-proc"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "A tiny crate to make working with discriminants easier."
 repository = "https://github.com/TheMikeste1/discrimin-ant"
@@ -21,6 +21,7 @@ syn = { workspace = true, features = ["full"] }
 [dev-dependencies]
 assert_matches = "1.5.0"
 discrimin-ant = { path = "../discrimin-ant" }
+pretty_assertions = "1.4.1"
 
 [lints]
 workspace = true

@@ -125,17 +125,19 @@ pub fn discriminant_impl(repr: TokenStream, item: TokenStream) -> TokenStream {
 /// * `variants`: The variants of the enum.
 #[expect(clippy::expect_used)]
 fn extract_enum_discriminants<T: PrimInt + ToTokens>(variants: &[Variant]) -> Vec<(Variant, Expr)> {
-    let mut disciminant_offset = T::one();
-    let mut current_discriminant_expr: Expr = parse_quote!(#disciminant_offset);
+    let mut disciminant_offset = T::zero();
+    let mut current_discriminant_expr: Option<Expr> = None;
     variants
         .iter()
         .map(|variant| {
             let discriminant_expr = if let Some(d) = &variant.discriminant {
                 disciminant_offset = T::one();
-                current_discriminant_expr = d.1.clone();
-                current_discriminant_expr.clone()
+                current_discriminant_expr = Some(d.1.clone());
+                unsafe { current_discriminant_expr.clone().unwrap_unchecked() }
             } else {
-                let expr = parse_quote!(#current_discriminant_expr + #disciminant_offset);
+                let expr = current_discriminant_expr
+                    .as_ref()
+                    .map_or_else(|| parse_quote!(#disciminant_offset), |current_expr| parse_quote!(#current_expr + #disciminant_offset));
                 disciminant_offset = disciminant_offset.checked_add(&T::one()).expect("Too many variants!");
                 expr
             };

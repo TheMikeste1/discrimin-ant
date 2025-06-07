@@ -3,9 +3,13 @@ mod complex_u_enum;
 #[expect(dead_code)]
 mod simple_fieldless_enum;
 #[expect(dead_code)]
+mod simple_no_discriminant_enum;
+#[expect(dead_code)]
 mod simple_signed_fieldless_enum;
 
 use super::*;
+
+use pretty_assertions::assert_eq;
 
 /// Converts a str representation of the expected output into the actual form.
 ///
@@ -82,5 +86,24 @@ fn assigned_signed_fieldless_variants() {
     let result = discriminant_impl(attr, tokens);
 
     let expected = str_to_expected(include_str!("./tests/simple_signed_fieldless_enum.rs"));
+    assert_eq!(result.to_string(), expected);
+}
+
+#[test]
+fn simple_no_discriminant_enum() {
+    let tokens = quote! {
+        pub enum SimpleNoDiscriminantEnum {
+            Zero,
+            One,
+            Two,
+            Three = 3,
+            Four,
+            Five,
+        }
+    };
+    let attr = quote! { u16 };
+    let result = discriminant_impl(attr, tokens);
+
+    let expected = str_to_expected(include_str!("./tests/simple_no_discriminant_enum.rs"));
     assert_eq!(result.to_string(), expected);
 }
